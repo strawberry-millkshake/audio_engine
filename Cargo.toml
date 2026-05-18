@@ -1,0 +1,11 @@
+[package]
+name = "audio_test_rust"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+coreaudio-rs = "0.14.2"
+objc2-audio-toolbox = "0.3.2"
+objc2-core-audio = "0.3.2"
+objc2-core-audio-types = "0.3.2"
+objc2-core-foundation = "0.3.2"
