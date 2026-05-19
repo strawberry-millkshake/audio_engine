@@ -4,9 +4,11 @@ extern crate coreaudio;
 
 use coreaudio::audio_unit::render_callback::{self, data};
 use coreaudio::audio_unit::{AudioUnit, IOType, SampleFormat};
-use std::f64::consts::PI;
 
 use std::time::SystemTime;
+
+mod signal_generator;
+use signal_generator::SineWaveGenerator;
 
 fn get_now(now: SystemTime) -> u64 {
     match now.elapsed() {
@@ -15,36 +17,6 @@ fn get_now(now: SystemTime) -> u64 {
             println!("Error: {e:?}");
             0
         }
-    }
-}
-
-struct SineWaveGenerator {
-    time: f64,
-    freq: f64,
-    volume: f64,
-    exponent: f64,
-}
-
-impl SineWaveGenerator {
-    fn new(freq: f64, volume: f64) -> Self {
-        SineWaveGenerator {
-            time: 0.,
-            freq,
-            volume,
-            exponent: 10.,
-        }
-    }
-}
-
-impl Iterator for SineWaveGenerator {
-    type Item = f32;
-    fn next(&mut self) -> Option<f32> {
-        self.time += 1. / 44_100.;
-        self.exponent = self.time;
-        let output =
-            ((self.freq * self.time * PI * 2.).sin() * self.volume) as f32;
-
-        Some(output)
     }
 }
 
