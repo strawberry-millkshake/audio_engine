@@ -23,8 +23,7 @@ impl Iterator for SineWaveGenerator {
     fn next(&mut self) -> Option<f32> {
         self.time += 1. / 44_100.;
         self.exponent = self.time;
-        let output =
-            ((self.freq * self.time * PI * 2.).sin() * self.volume) as f32;
+        let output = ((self.freq * self.time * PI * 2.).sin() * self.volume) as f32;
 
         Some(output)
     }
